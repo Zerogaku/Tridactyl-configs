@@ -130,6 +130,10 @@
     color-scheme: only light; /* Prevent Firefox from adding a white background on dark-mode sites */
 }
 
+/* disable status indicator if fullscreening a video (like youtube) */
+:root:fullscreen .TridactylStatusIndicator {
+    display: none !important;
+}
 :root .TridactylStatusIndicator {
     position: fixed !important;
     bottom: 10px !important;
@@ -143,7 +147,12 @@
     text-transform: uppercase !important;
     font-weight: bold !important;
 }
+:root .TridactylStatusIndicator.TridactylPrivate:before{
+	content: "(⁠⌐⁠■⁠-⁠■⁠) ";
+	/* font-family: "JetBrainsMono NF"; */
+}
 
+/* REGULAR SESSION STYLING*/
 /* Insert mode */
 :root .TridactylStatusIndicator[class$="TridactylModeinsert"] {
 	--tridactyl-status-bg: #87CEEB;
@@ -179,3 +188,46 @@
 	--tridactyl-status-bg: #C9FF27;
 	background: var(--tridactyl-status-bg) !important;
 }
+
+/* PRIVATE SESSION STYLING*/
+/* /1* Insert mode *1/ */
+/* :root .TridactylStatusIndicator[class$="TridactylModeinsert"].TridactylPrivate { */
+/* 	--tridactyl-status-bg: #87CEEB; */
+/* 	background: var(--tridactyl-status-bg) !important; */
+/* 	border: 3px solid purple !important; */
+/* } */
+
+/* /1* Visual mode *1/ */
+/* :root .TridactylStatusIndicator[class$="TridactylModevisual"].TridactylPrivate{ */
+/* 	--tridactyl-status-bg: #e63946; */
+/* 	background: var(--tridactyl-status-bg) !important; */
+/* 	border: 3px solid purple !important; */
+/* } */
+
+/* /1* Input mode *1/ */
+/* :root .TridactylStatusIndicator[class$="TridactylModeinput"].TridactylPrivate { */
+/* 	--tridactyl-status-bg: #219ebc; */
+/* 	background: var(--tridactyl-status-bg) !important; */
+/* 	border: 3px solid purple !important; */
+/* } */
+
+/* /1* Ignore mode *1/ */
+/* :root .TridactylStatusIndicator[class$="TridactylModeignore"].TridactylPrivate { */
+/* 	--tridactyl-status-bg: #9966CC; */
+/* 	background: var(--tridactyl-status-bg) !important; */
+/* 	border: 3px solid purple !important; */
+/* } */
+
+/* /1* Hint mode *1/ */
+/* :root .TridactylStatusIndicator[class$="TridactylModehint"].TridactylPrivate { */
+/* 	--tridactyl-status-bg: #38b000; */
+/* 	background: var(--tridactyl-status-bg) !important; */
+/* 	border: 3px solid purple !important; */
+/* } */
+
+/* /1* Normal *1/ */
+/* :root .TridactylStatusIndicator[class$="TridactylModenormal"].TridactylPrivate { */
+/* 	--tridactyl-status-bg: #C9FF27; */
+/* 	background: var(--tridactyl-status-bg) !important; */
+/* 	border: 3px solid purple !important; */
+/* } */

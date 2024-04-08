@@ -4,9 +4,17 @@
 # autocmd DocStart .* source C:\User\Null\Appdata\Roaming\tridactyl\tridactyrc
 # NOTE: on windows place themes folder in directory containing the tridactylrc
 
+# also for conveniency sake, to get tridactyl running on sites protected my firefox,
+# remove urls from extensions.webextensions.restrictedDomains in about:config
+# and set privacy.resistFingerprinting.block_mozAddonManager to true
+
 # Personal theme
 colorscheme custom
-set editorcmd $TERMINAL -n tridactyl -e nvim
+# set editorcmd $TERMINAL -n tridactyl -e nvim
+# fix for tridactyl edit freezing https://github.com/tridactyl/tridactyl/issues/4771
+alias editor_xclip composite js document.activeElement.addEventListener('focusin', e => { if(e.target.classList.contains('TridactylEditing')) tri.native.run('xclip -sel clip -o').then(c => tri.excmds.yank(c.content.slice(0, -1))) }, {'once': true}) | editor
+bind --mode=insert <C-i> editor_xclip
+bind --mode=input <C-i> editor_xclip
 
 # Sane defaults
 set smoothscroll false
@@ -15,6 +23,7 @@ jsb Object.keys(tri.config.get("searchurls")).reduce((prev, u) => prev.then(_ =>
 set relatedopenpos next
 bind J tabnext
 bind K tabprev
+set hintdelay 100
 
 # Custom search urls
 # youtube
@@ -35,3 +44,15 @@ bindurl ^https://github.com gi hint -Vc .AppHeader-searchButton
 # global marks for quick tab switching
 bind <A-\> gobble 1 markaddglobal
 bind \ gobble 1 markjumpglobal
+
+# rebind tab for selecting command results
+bind --mode=ex <C-j> ex.next_completion
+bind --mode=ex <C-k> ex.prev_completion
+
+# close all other tabs binding
+
+bind gx* tabonly
+
+# Multiwindow bindings
+bind gd tabdetach
+bind gD composite tabduplicate; tabdetach
