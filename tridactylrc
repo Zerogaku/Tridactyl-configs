@@ -23,6 +23,7 @@ set relatedopenpos next
 bind J tabnext
 bind K tabprev
 set hintdelay 100
+set markjumpnoisy false
 
 # Custom search urls
 # run the below line to remove tridactyl's default aliases
